@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DepsWebApp</name>
+    </assembly>
+    <members>
+        <member name="T:DepsWebApp.Clients.IRatesProviderClient">
+            <summary>
+            Abstract currency rates provider interface.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Clients.IRatesProviderClient.GetRatesAsync">
+            <summary>
+            Requests rates from  currency rates provider.
+            </summary>
+            <returns>Returns currency rates.</returns>
+        </member>
+        <member name="T:DepsWebApp.Clients.NbuClient">
+            <summary>
+            NBU currency rates provider.
+            For more details, please visit
+            https://bank.gov.ua/ua/open-data/api-dev
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Clients.NbuClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Options.IOptions{DepsWebApp.Options.NbuClientOptions})">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Clients.NbuClient.GetRatesAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:DepsWebApp.Contracts.NbuRate">
+            <summary>
+            NBU provider native data model for currency rate.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Contracts.NbuRate.Rate">
+            <summary>
+            Currency rate related to base currency (UAH).
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Contracts.NbuRate.Currency">
+            <summary>
+            Currency code.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Controllers.RatesController">
+            <summary>
+            Rates controller 
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Controllers.RatesController.#ctor(DepsWebApp.Services.IRatesService,Microsoft.Extensions.Logging.ILogger{DepsWebApp.Controllers.RatesController})">
+            <summary>
+            Rates Controller
+            </summary>
+            <param name="rates"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:DepsWebApp.Controllers.RatesController.Get(System.String,System.String,System.Nullable{System.Decimal})">
+            <summary>
+            Get method 
+            </summary>
+            <param name="srcCurrency"></param>
+            <param name="dstCurrency"></param>
+            <param name="amount"></param>
+            <returns>Result of change currency</returns>
+        </member>
+        <member name="T:DepsWebApp.Controllers.RegistrationController">
+            <summary>
+            Registration controller
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Controllers.RegistrationController.Register">
+            <summary>
+            Register method, not implemented
+            Work with ExceptionFilter
+            </summary>
+            <returns>NotImplementedException</returns>
+        </member>
+        <member name="T:DepsWebApp.ExceptionFilter">
+            <summary>
+            Exception filter
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.ExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            Function when exception is triggered worked
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:DepsWebApp.Models.CurrencyRate">
+            <summary>
+            Currency rate model.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.CurrencyRate.Currency">
+            <summary>
+            Currency code (ISO).
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.CurrencyRate.Rate">
+            <summary>
+            Currency rate related to base currency.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Models.ExchangeResult">
+            <summary>
+            Exchange operation result.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExchangeResult.Rate">
+            <summary>
+            Exchange rate.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExchangeResult.SourceAmount">
+            <summary>
+            Amount in source currency.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Models.ExchangeResult.DestinationAmount">
+            <summary>
+            Amount in destination currency.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Models.ExchangeResult.#ctor(System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="rate">Set <see cref="P:DepsWebApp.Models.ExchangeResult.Rate"/> value.</param>
+            <param name="srcAmount">Set <see cref="P:DepsWebApp.Models.ExchangeResult.SourceAmount"/> value.</param>
+            <param name="destAmount">Set <see cref="P:DepsWebApp.Models.ExchangeResult.DestinationAmount"/> value.</param>
+        </member>
+        <member name="T:DepsWebApp.Options.CacheOptions">
+            <summary>
+            Caching options.
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Options.CacheOptions.RatesCacheLifeTime">
+            <summary>
+            Default rates cache lifetime.
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Options.NbuClientOptions">
+            <summary>
+            Options of Nbu Client
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Options.NbuClientOptions.BaseAddress">
+            <summary>
+            Base address with URL
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Options.NbuClientOptions.IsValid">
+            <summary>
+            Valid check
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Options.RatesOptions">
+            <summary>
+            Structure of options of rates
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Options.RatesOptions.BaseCurrency">
+            <summary>
+            Base currency
+            </summary>
+        </member>
+        <member name="P:DepsWebApp.Options.RatesOptions.IsValid">
+            <summary>
+            Valid check
+            </summary>
+        </member>
+        <member name="T:DepsWebApp.Services.CacheHostedService">
+            <summary>
+            Cache 
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Services.CacheHostedService.#ctor(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="scopeFactory"></param>
+        </member>
+        <member name="M:DepsWebApp.Services.CacheHostedService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Start work in async 
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DepsWebApp.Services.CacheHostedService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Stop work in async
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DepsWebApp.Services.IRatesService">
+            <summary>
+            Currency rates service.
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Services.IRatesService.ExchangeAsync(System.String,System.String,System.Decimal)">
+            <summary>
+            Exchanges given amount from source currency to destination currency.
+            </summary>
+            <param name="srcCurrency">Source currency</param>
+            <param name="destCurrency">Destination currency</param>
+            <param name="amount">Amount of funds.</param>
+            <returns>Returns exchange result or <c>null</c> if source or destination currency wasn't found.</returns>
+        </member>
+        <member name="M:DepsWebApp.Services.IRatesService.ActualizeRatesAsync">
+            <summary>
+            Actualize rates.
+            Kind of abstraction leak.
+            </summary>
+            <returns>Returns awaiter</returns>
+        </member>
+        <member name="T:DepsWebApp.Services.LogUrlMiddleware">
+            <summary>
+            Class for LogURL middleware
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Services.LogUrlMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Constructor 
+            </summary>
+            <param name="next"></param>
+            <param name="loggerFactory"></param>
+        </member>
+        <member name="M:DepsWebApp.Services.LogUrlMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke middleware
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DepsWebApp.Services.LogUrlMiddlewareExtensions">
+            <summary>
+            Middleware for logging
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Services.LogUrlMiddlewareExtensions.UseLogUrl(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Log urls
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DepsWebApp.Services.RatesService">
+            <summary>
+            Rates Service
+            </summary>
+        </member>
+        <member name="M:DepsWebApp.Services.RatesService.#ctor(DepsWebApp.Clients.IRatesProviderClient,Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Options.IOptions{DepsWebApp.Options.RatesOptions},Microsoft.Extensions.Options.IOptions{DepsWebApp.Options.CacheOptions})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="client"></param>
+            <param name="cache"></param>
+            <param name="ratesOptions"></param>
+            <param name="cacheOptions"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DepsWebApp.Services.RatesService.ExchangeAsync(System.String,System.String,System.Decimal)">
+            <summary>
+            Exchange in async 
+            </summary>
+            <param name="srcCurrency"></param>
+            <param name="destCurrency"></param>
+            <param name="amount"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:DepsWebApp.Services.RatesService.ActualizeRatesAsync">
+            <summary>
+            Actualize
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DepsWebApp.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure Services
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:DepsWebApp.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configure
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

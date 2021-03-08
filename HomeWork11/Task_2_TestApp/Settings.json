@@ -1,0 +1,21 @@
+﻿[
+  {
+    "Link": "http://localhost:5000/Rates/USD/EUR",
+    "StatusCode": "OK",
+    "ExpectedAnswer": null
+  },
+  {
+    "Link": "http://localhost:5000/Rates/UAH/EUR",
+    "StatusCode": "OK",
+    "ExpectedAnswer": null
+  },
+  {
+    "Link": "http://localhost:5000/Rates/Uxvcz/EvxcUR",
+    "StatusCode": "BadRequest"
+  },
+  {
+    "Link": "http://localhost:5000/Registration",
+    "StatusCode": "OK"
+    
+  }
+]
